@@ -1,0 +1,29 @@
+# Build trees
+build/
+out/
+cmake-build-*/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Large generated / downloaded datasets
+data/*
+!data/README.md
+
+# Raw benchmark dumps (curated CSVs and figures in results/ are tracked)
+results/raw/
+
+# Editors / OS
+.vs/
+.vscode/
+*.user
+.DS_Store
+Thumbs.db
+
+# Profiler captures
+*.nsys-rep
+*.ncu-rep
+*.qdrep
