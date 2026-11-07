@@ -1,188 +1,100 @@
-# Out-of-Core RT-Core Fixed-Radius Neighbor Search
+# Out-of-core RT-core fixed-radius neighbor search
 
-**PCAP project, Group 15** — Abyuday Gupta, Aditya Chetan Thakur, Sankalp Arya, Shaurya Jain
+This is our Parallel Computing and Architecture Programming project (Group 15). For every query point, the program counts the points that lie within a radius r and, if asked, keeps a bounded list of their original IDs. The host code is written in C and the GPU parts are CUDA kernels and OptiX device programs. We compare four backends that all follow the same output contract:
 
-GPU ray-tracing (RT) cores accelerate BVH traversal, and RTNN-style methods use
-them for neighbor search — but only while the whole acceleration structure fits
-in device memory. This repository implements the synopsis' answer: split the
-points into spatial **tiles**, keep a **compact, relocatable BVH per tile in
-pinned host memory**, **stream** tiles to the GPU with **double buffering**,
-**reorder queries** so each loaded tile serves as many queries as possible, and
-let a **cost model** pick the tile size. Results are exact and identical to a
-CPU reference on every configuration.
+| Backend | What it does |
+|---|---|
+| `cpu-grid` | Serial uniform grid on the CPU (our reference) |
+| `cuda-grid` | Linked-cell grid built and queried with CUDA kernels |
+| `rt-incore` | One compacted OptiX acceleration structure kept resident on the GPU |
+| `rt-ooc` | Morton-ordered tiles kept in pinned host memory and streamed through one or two device slots under a memory budget |
 
-## Results (RTX 4060 Laptop GPU, 8 GB)
+## Building
 
-All 309 benchmark runs returned exactly the CPU reference's answers. Full tables:
-[results/summary.md](results/summary.md); method: [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md).
-
-**1. Past device memory, explicit out-of-core streaming beats every in-core method.**
-On Windows (WDDM) an in-core working set larger than VRAM does not fail: the
-driver pages device memory to host RAM, and the in-core methods slow down
-sharply. The out-of-core search used a fixed **1 GB** budget throughout.
-
-![scaling](results/figures/scaling.png)
-
-| points | RT out-of-core (ours) | RT in-core, G=8 | RT in-core, G=1 (RTNN-style) | CUDA grid |
-|---:|---:|---:|---:|---:|
-| 40M | 0.96 s | 0.87 s | 0.79 s | 0.51 s |
-| 80M | 1.69 s | 1.70 s | 1.65 s | 1.03 s |
-| 120M | **2.59 s** | 3.90 s | 6.02 s | 2.56 s |
-| 160M | **3.69 s** | 8.29 s | 11.56 s | 6.75 s |
-
-At 160M points the out-of-core search is 2.2× faster than in-core RT, 3.1× faster
-than the RTNN-style configuration, and 1.8× faster than the CUDA grid. While
-everything fits, it costs 1.0–1.6× the in-core RT time.
-
-**2. Very little device memory is needed.** With automatic tiling, 40M points take
-0.95 s with a 64 MB budget (0.8% of the GPU) against 0.86 s in-core with all of it.
-
-![budget](results/figures/budget.png)
-
-**3. Query ordering decides tile reuse.** 20M points, 128 tiles, only 4 tile slots:
-
-| order | tile loads / tile | bytes streamed | GPU pipeline | end-to-end |
-|---|---:|---:|---:|---:|
-| tile-major + Morton (default) | **1.00** | 0.7 GB | 266 ms | 455 ms |
-| global Morton (synopsis) | 2.58 | 1.5 GB | 296 ms | 732 ms |
-| original | 19.4 | 8.6 GB | 771 ms | 1033 ms |
-| random | 19.4 | 8.6 GB | 771 ms | 1363 ms |
-
-Pipeline-aware Belady eviction needs fewer loads than LRU (2.58 vs 2.63 per tile
-for Morton order) at the same speed.
-
-![order](results/figures/ablation_order.png)
-
-**4. Double buffering hides most of the transfer time.** Overlapping copies with
-traversal cuts the pipeline from 326 ms to 244 ms (traversal alone: 199 ms);
-two slots are enough.
-
-![overlap](results/figures/ablation_overlap.png)
-
-**5. The cost model (Eq. 1) picks a good tile size.** Its absolute error stays
-within −13% … +10% over 4–1024 tiles, and the tile count it picks runs within 5%
-of the fastest one measured.
-
-![tile size](results/figures/tile_size_model.png)
-
-**6. Point bucketing (our addition).** Grouping 8–16 Morton-adjacent points per
-BVH primitive shrinks the GAS from 19 to 1.2 bytes/point and the streamed tile
-data from 43 to 21 bytes/point. It makes traversal 2.5× faster on clustered
-data and 1.5× faster on surface (scene) data; on uniform data it is neutral up
-to G = 4.
-
-![bucketing](results/figures/group_size.png)
-
-**7. Halo points beat halo queries** in all 8 configurations tested (halo
-queries take 5–17% longer), even though halo points stream 8–94% more bytes:
-duplicate rays cost more traversal than duplicate points cost transfer.
-
-**Where RT cores stand.** On this Ada laptop GPU a tuned CUDA uniform grid
-(sorted cell lists, Morton-ordered queries) is still the fastest *in-core*
-method for counting: 7 ms of kernel time vs 37 ms of RT traversal for 4M
-uniform points. Each candidate costs an RT-core → SM intersection-program
-hand-off, while the grid's candidate tests are coalesced SIMT loads. The RT
-path's advantages here are its memory compactness, which bucketing amplifies,
-and the out-of-core behaviour above. Results with neighbor lists (K = 16/64)
-are in the summary.
-
-## What is implemented
-
-| Synopsis item | Implementation | Where |
-|---|---|---|
-| RT-core fixed-radius search | points → AABBs (custom primitives), queries → zero-length rays, exact test in the intersection program, counts carried across tiles | `src/rt/` |
-| Spatial tiles | median-split kd-tree built once; a tiling is a cut of the tree at depth *d* | `src/ooc/kdtree.*` |
-| Tiles overlap by *r*; no duplicates | ownership rule: halo **points** (single-tile routing) or halo **queries** (disjoint tiles, multi-tile routing) — duplicates are never produced | `src/ooc/tile_store.*` |
-| Compact BVH per tile, in host memory | compacted GAS + points in one pinned blob; loaded with one DMA + `optixAccelRelocate` | `src/ooc/tile_store.*`, `executor.*` |
-| Double-buffered streaming | 3 CUDA streams, N tile slots, event-ordered; copy stream is DMA-only | `src/ooc/executor.*` |
-| Morton-code query reordering | global Morton order, and the default **tile-major order** (Morton inside each tile) computed on the GPU | `src/ooc/planner.cpp`, `gpu_order.cu` |
-| Cost model for tile size (Eq. 1) | calibrated transfer/traversal/launch costs; predicts every depth and picks the fastest that fits the budget | `src/ooc/cost_model.*` |
-
-Beyond the synopsis:
-
-* **Point bucketing** (`--group G`): one BVH primitive per G Morton-adjacent
-  points — 15× smaller GAS, 2× fewer bytes to stream, up to 2.5× faster traversal
-  on clustered data.
-* **Belady (offline-optimal) tile eviction** — the full access sequence is known
-  before execution — next to LRU.
-* **Exactness by construction**: one rounding-controlled distance function on
-  CPU and GPU and conservative candidate filters, so all backends agree
-  bit-for-bit (tested with `==`, including exact-distance ties on a lattice).
-* Baselines: OpenMP CPU grid, CUDA uniform grid (cell lists), in-core RT
-  (RTNN-style), brute force.
-* `--budget-mb` emulates smaller GPUs; `--verify` checks every run.
-
-## Build
-
-Requirements: an RTX GPU (Turing or newer) with a recent driver, CUDA 12+
-(tested 13.4), Visual Studio 2022 / Build Tools with C++ and CMake ≥ 3.24,
-Python 3.10+ for benchmarks. The OptiX 9.1 headers are fetched automatically
-from [NVIDIA/optix-dev](https://github.com/NVIDIA/optix-dev) (set
-`OptiX_INSTALL_DIR` to use a local SDK instead).
+We tested the build on Windows 11 with an RTX 4060 Laptop GPU, CUDA 13.4, MSVC 19.44 and the OptiX 9.1 headers (CMake fetches the headers, so no OptiX SDK install is needed). You need the Visual Studio C++ build tools, the CUDA Toolkit, CMake and Ninja. The default GPU architecture is 89; pass `-CudaArch` to target a different one.
 
 ```powershell
-./scripts/build.ps1            # Release build in ./build (sets up the VS x64 environment)
-./scripts/build.ps1 -Test      # build + C++ unit/GPU tests (ctest)
-python -m venv .venv; .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe -m pytest   # end-to-end tests of the CLI
+./scripts/build.ps1 -Test
 ```
 
-Only Windows has been tested. The CMake project has no Windows-only
-dependency apart from `scripts/build.ps1`, so on Linux
-`cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build` is the
-intended route, but it has not been tried.
+This builds `build_c17/ooc_rtnn.exe` (the main program), `build_c17/radius_demo.exe` (a small demo) and the C unit tests, and then runs the tests. Both executables link the same search library.
 
-## Run
+## Small demonstration
 
 ```powershell
-# every backend on 4M uniform points, ~32 neighbors, verified against the CPU
-./build/ooc_rtnn --points uniform:4M --k-expected 32 --method cpu-grid,cuda-grid,rt-incore,rt-ooc --group 8
-
-# out-of-core with a 256 MB device budget, show the cost-model table
-./build/ooc_rtnn --points uniform:40M --method rt-ooc --group 8 --budget-mb 256 --print-estimates
-
-# ablation: every order x eviction policy on the same tiles
-./build/ooc_rtnn --points clustered:20M --radius 0.004 --method rt-ooc --depth 7 --slots 4 `
-                 --order tiled,morton,random,original --eviction belady,lru
-
-# a real point cloud, 16 neighbor ids per query, JSON output
-./build/ooc_rtnn --points file:data/scan.ply --radius 0.05 --max-neighbors 16 --method rt-ooc --json out.jsonl
+./scripts/demo.ps1
+./scripts/demo.ps1 -Method rt-ooc -MaxIds 1
+./scripts/demo.ps1 -Method rt-ooc -TilePoints 1
 ```
 
-`./build/ooc_rtnn --help` lists every option. Each run prints a summary line and,
-with `--json`, appends a JSON object with ~80 metrics (timing breakdown, tile
-loads, bytes moved, cost-model prediction, verification result).
+The first command runs all four backends on the six points and three queries in [examples](examples/), with radius one. Every backend reports the counts 4, 2 and 0, with the neighbor lists `[0, 1, 2, 4]`, `[1, 3]` and `[]`, and each result is checked against brute force. The second command keeps only one ID per query, so you can see that the list is truncated while the counts stay complete. The third one splits the points into single-point tiles; the tile printout shows which points each tile owns and which tiles each query is routed to, and the answers do not change. Add `-Timing` to see build and search times (on six points these mostly measure GPU setup).
 
-## Reproduce the experiments
+Two larger demonstrations use one million points:
 
 ```powershell
-.\.venv\Scripts\python.exe bench\run_experiments.py      # ~40 min; --quick for a smoke run
-.\.venv\Scripts\python.exe bench\plot_results.py         # figures + results/summary.md
+./scripts/budget.ps1
+./scripts/compare.ps1
 ```
 
-See [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) for the methodology and
-[docs/DESIGN.md](docs/DESIGN.md) for how everything works.
+`budget.ps1` first shows a tile that is too large for an 8 MiB executor budget being rejected, and then runs the same search under 8 MiB and 2 MiB budgets (the totals are identical, but the smaller budget needs more tile reloads). `compare.ps1` runs the CUDA grid and both RT backends on the same input and prints the retained-search time and explicit device bytes of each. `present.ps1` runs all of the above in order.
 
-## Repository layout
+## Running your own searches
 
-```
-src/common/   vector math (exact distance), Morton codes, datasets & I/O, CLI parsing, host utilities
-src/cpu/      OpenMP grid reference + brute force, verification
-src/cuda/     CUDA grid baseline, AABB/Morton/sort kernels, RAII device & pinned buffers
-src/rt/       OptiX engine (context, pipeline, SBT, GAS build/compaction/relocation), device programs, in-core search
-src/ooc/      kd-tree tiling, tile store, cost model, planner (ordering, routing, cache), GPU ordering, pipelined executor
-src/app/      ooc_rtnn command-line driver
-tests/        C++ unit + GPU tests (ctest), pytest end-to-end tests, host micro-benchmarks
-bench/        experiment runner and plotting
-docs/         design and experiment notes
-results/      figures and summary tables (raw JSON lines are git-ignored)
+```powershell
+./build_c17/ooc_rtnn.exe --points uniform:100K --method cpu-grid,cuda-grid,rt-incore,rt-ooc --verify full
+./build_c17/ooc_rtnn.exe --points scene:200K --radius 0.015 --method rt-ooc --tile-points 64K --budget-mb 64 --group 8 --max-neighbors 16 --repeat 3 --verify full
+./build_c17/ooc_rtnn.exe --help
 ```
 
-## References
+Synthetic inputs need no files (`uniform:100K`, `clustered:100K:5`, `scene:100K`). For stored data, use `--points file:PATH` and optionally `--queries file:PATH`; without `--queries` the point set is queried against itself. The loader reads these formats:
 
-1. I. Wald et al. *RTX Beyond Ray Tracing: Exploring the Use of Hardware Ray Tracing Cores for Tet-Mesh Point Location.* HPG 2019.
-2. Y. Zhu. *RTNN: Accelerating Neighbor Search Using Hardware Ray Tracing.* PPoPP 2022. [code](https://github.com/horizon-research/rtnn)
-3. V. Nagarajan et al. *RT-kNNS Unbound: Using RT Cores to Accelerate Unrestricted Neighbor Search.* ICS 2023.
-4. J. Henneberg, F. Schuhknecht. *RTIndeX: Exploiting Hardware-Accelerated GPU Raytracing for Database Indexing.* PVLDB 16(13), 2023.
-5. L. A. Belady. *A study of replacement algorithms for a virtual-storage computer.* IBM Systems Journal, 1966.
-6. NVIDIA OptiX 9.1 Programming Guide; NVIDIA/optix-dev headers.
+| Extension | Layout |
+|---|---|
+| `.bin` | little-endian float32 x, y, z (12 bytes per point) |
+| `.kitti` | little-endian float32 x, y, z, intensity (16 bytes; intensity is ignored) |
+| `.ply` | ASCII or little-endian binary PLY vertices |
+| `.xyz`, `.txt`, `.csv`, `.pts` | one coordinate triple per line, separated by spaces, commas or semicolons; lines starting with `#` are skipped |
+
+Point IDs follow the input row order, starting at zero. Non-finite coordinates, empty files, truncated binary records and unsupported PLY layouts are rejected with an error message and a nonzero exit code.
+
+Some options worth knowing about:
+
+- `--budget-mb` caps the streamed executor's explicit device allocations (slots, query windows, counts, ID lists and routing arrays). The CUDA context, OptiX pipeline, construction, calibration and host arrays are not part of this cap.
+- `--tile-points 0` lets the planner pick a tile capacity from a short calibration run; any other value skips calibration.
+- `--slots 1|2` and `--overlap on|off` control the transfer/compute pipeline.
+- `--max-neighbors K` keeps at most K IDs per query; the count is always complete.
+- `--json PATH` appends one measurement row per run.
+
+## How the streamed backend works
+
+Points are sorted once by Morton code and cut into contiguous chunks, so each point belongs to exactly one tile. For each tile we build a compacted OptiX acceleration structure over buckets of G points and store it, together with the tile's points, in a pinned host blob. At query time the queries are also Morton-sorted and processed in windows. A window is routed to every tile whose radius-expanded bounding box it may touch, the tile is copied into a free device slot and relocated, and the OptiX programs count the bucket members that pass the squared-distance test. Since a point lives in only one tile, a query can visit several tiles without any duplicate removal. CUDA events keep a slot (and its pinned staging area) from being overwritten while an earlier copy or launch still uses it. Finally, results are scattered back to the caller's query order.
+
+The distance test uses single-precision operations in a fixed order on both host and device (contraction is disabled on the host, and the device uses explicitly rounded intrinsics), so all backends agree exactly, including at the radius boundary.
+
+## Tests and measurements
+
+The Python tests need the project virtual environment:
+
+```powershell
+python -m venv .venv
+./.venv/Scripts/python.exe -m pip install -r requirements-lock.txt
+./scripts/verify.ps1
+```
+
+`verify.ps1` builds the project, runs the C tests and the pytest suite, validates both stored measurement releases and runs the demo on all four backends.
+
+The measurements used in our report are in `results/`. `results/c17_20261029_v2/` holds the main comparison (250 rows from 125 independent processes) and `results/c17_lifecycle_20261029/` holds the repeated-batch runs on retained indexes. Each folder keeps the exact commands, raw rows, a source snapshot and a manifest with hashes, which `bench/c17_evidence.py --validate` and `bench/c17_lifecycle.py --validate` check. [results/summary.md](results/summary.md) is generated from them by `bench/write_c17_summary.py`. To record a new release, build first, run `bench/c17_record_build.py` from the compiler environment, and give the benchmark driver a new output directory. `bench/prepare_armadillo.py` downloads and converts the Stanford Armadillo scan (into `data/`, which Git ignores).
+
+In short, the CUDA grid had the shortest retained-search time in every workload we measured, and the streamed RT backend kept its explicit device working set small at the price of routing and transfer costs. All numbers come from one laptop GPU, and the real scan we used fits in device memory, so we would not generalise them beyond that setting.
+
+## Layout
+
+| Path | Contents |
+|---|---|
+| `src_c/` | C host code, CUDA kernels and OptiX device programs |
+| `examples/` | the small demo program and its point/query files |
+| `scripts/` | build, verification and demo scripts |
+| `tests/` | C unit tests and pytest checks for the CLI, demo and measurement validators |
+| `bench/` | benchmark drivers, build recording, dataset preparation and summary generation |
+| `results/` | the measurement releases used in the report |
+| `cmake/` | embeds the compiled OptiX module into the library |

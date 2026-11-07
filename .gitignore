@@ -1,5 +1,7 @@
 # Build trees
 build/
+build_c17/
+build-debug/
 out/
 cmake-build-*/
 
@@ -9,12 +11,12 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
-# Large generated / downloaded datasets
-data/*
-!data/README.md
+# Downloaded datasets
+data/
 
-# Raw benchmark dumps (curated CSVs and figures in results/ are tracked)
+# Benchmark output that has not been validated
 results/raw/
+results/*/*.partial.json*
 
 # Editors / OS
 .vs/

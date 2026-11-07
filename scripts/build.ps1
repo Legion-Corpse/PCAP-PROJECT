@@ -2,13 +2,13 @@
 .SYNOPSIS
   Configures and builds ooc_rtnn with Ninja inside a Visual Studio x64 developer shell.
 .EXAMPLE
-  ./scripts/build.ps1                 # Release build into ./build
+  ./scripts/build.ps1                 # Release build into ./build_c17
   ./scripts/build.ps1 -Config Debug -Clean
   ./scripts/build.ps1 -Test           # build, then run ctest
 #>
 param(
   [ValidateSet("Release", "RelWithDebInfo", "Debug")] [string] $Config = "Release",
-  [string] $BuildDir = "build",
+  [string] $BuildDir = "build_c17",
   [switch] $Clean,
   [switch] $Test,
   [string] $CudaArch = "89"
@@ -27,6 +27,11 @@ if (-not $env:VSCMD_ARG_TGT_ARCH) {
 }
 
 $build = Join-Path $root $BuildDir
+if ($Clean) {
+  $resolvedBuild = [IO.Path]::GetFullPath($build)
+  $resolvedRoot = [IO.Path]::GetFullPath($root).TrimEnd('\') + '\'
+  if (-not $resolvedBuild.StartsWith($resolvedRoot, [StringComparison]::OrdinalIgnoreCase)) { throw 'Clean build path must be inside the project workspace' }
+}
 if ($Clean -and (Test-Path $build)) { Remove-Item -Recurse -Force $build }
 
 cmake -S $root -B $build -G Ninja "-DCMAKE_BUILD_TYPE=$Config" "-DCMAKE_CUDA_ARCHITECTURES=$CudaArch"

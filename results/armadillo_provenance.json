@@ -1,0 +1,10 @@
+{
+  "url": "https://github.com/isl-org/open3d_downloads/releases/download/20220201-data/ArmadilloMesh.ply",
+  "source_sha256": "483563fca686b66168e1e45339c50e71a5dc8a526a04a545a16b9237d5eaa023",
+  "vertex_sha256": "9eaea7be54832310b38cc8828426914094ddd4c0ea0f04129369db35cf699673",
+  "vertices": 172974,
+  "preprocessing": "Copied original x/y/z float32 coordinates exactly; converted endian; omitted faces",
+  "units": "Original coordinates; no scaling",
+  "credit": "Stanford Computer Graphics Laboratory",
+  "terms": "https://graphics.stanford.edu/data/3Dscanrep/"
+}

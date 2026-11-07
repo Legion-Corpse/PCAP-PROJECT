@@ -1,0 +1,922 @@
+[
+  {
+    "configuration": "uniform100K_cpu-grid",
+    "method": "cpu-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 3.6752,
+      "min": 3.1236,
+      "max": 8.3987
+    },
+    "search_ms": {
+      "median": 94.5466,
+      "min": 90.58,
+      "max": 105.1039
+    },
+    "phase_total_ms": {
+      "median": 98.9787,
+      "min": 97.4055,
+      "max": 109.4718
+    },
+    "process_wall_ms": {
+      "median": 234.2730999989726,
+      "min": 191.4898000031826,
+      "max": 235.53749999700813
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 112.8494,
+      "min": 82.5499,
+      "max": 128.0268
+    }
+  },
+  {
+    "configuration": "uniform100K_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 80.1571,
+      "min": 72.3954,
+      "max": 86.9397
+    },
+    "search_ms": {
+      "median": 3.0018,
+      "min": 2.9187,
+      "max": 3.1432
+    },
+    "phase_total_ms": {
+      "median": 83.2485,
+      "min": 75.3141,
+      "max": 90.0829
+    },
+    "process_wall_ms": {
+      "median": 121.69300000095973,
+      "min": 116.29490000268561,
+      "max": 132.48210000165273
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 83.25,
+      "min": 75.3184,
+      "max": 89.9816
+    }
+  },
+  {
+    "configuration": "uniform100K_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 203.1898,
+      "min": 194.2908,
+      "max": 244.3611
+    },
+    "search_ms": {
+      "median": 12.8175,
+      "min": 10.6169,
+      "max": 15.0842
+    },
+    "phase_total_ms": {
+      "median": 216.0073,
+      "min": 205.5141,
+      "max": 257.5546
+    },
+    "process_wall_ms": {
+      "median": 287.69930000271415,
+      "min": 267.4148000005516,
+      "max": 336.11889999883715
+    },
+    "executor_bytes": {
+      "median": 4253504,
+      "min": 4253504,
+      "max": 4253504
+    },
+    "host_tile_bytes": {
+      "median": 1853440,
+      "min": 1853440,
+      "max": 1853440
+    },
+    "first_answer_wall_ms": {
+      "median": 212.8919,
+      "min": 205.8162,
+      "max": 257.815
+    }
+  },
+  {
+    "configuration": "uniform100K_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 209.7484,
+      "min": 200.6192,
+      "max": 215.0387
+    },
+    "search_ms": {
+      "median": 12.2542,
+      "min": 10.7209,
+      "max": 15.0793
+    },
+    "phase_total_ms": {
+      "median": 221.3729,
+      "min": 212.8734,
+      "max": 230.118
+    },
+    "process_wall_ms": {
+      "median": 297.4087000002328,
+      "min": 276.7491999984486,
+      "max": 316.84499999755644
+    },
+    "executor_bytes": {
+      "median": 5174272,
+      "min": 5174272,
+      "max": 5174272
+    },
+    "host_tile_bytes": {
+      "median": 1856640,
+      "min": 1856640,
+      "max": 1856640
+    },
+    "first_answer_wall_ms": {
+      "median": 222.4502,
+      "min": 210.3552,
+      "max": 231.0071
+    }
+  },
+  {
+    "configuration": "uniform1M_cpu-grid",
+    "method": "cpu-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 37.1846,
+      "min": 31.2288,
+      "max": 59.1748
+    },
+    "search_ms": {
+      "median": 1431.383,
+      "min": 1264.9269,
+      "max": 1746.2496
+    },
+    "phase_total_ms": {
+      "median": 1464.4724,
+      "min": 1307.4759,
+      "max": 1777.4784
+    },
+    "process_wall_ms": {
+      "median": 2979.161800001748,
+      "min": 2657.3304000012286,
+      "max": 3269.114200000331
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 1380.1063,
+      "min": 1278.6641,
+      "max": 1451.9767
+    }
+  },
+  {
+    "configuration": "uniform1M_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 86.039,
+      "min": 80.2272,
+      "max": 110.934
+    },
+    "search_ms": {
+      "median": 26.6766,
+      "min": 26.3684,
+      "max": 31.9457
+    },
+    "phase_total_ms": {
+      "median": 113.5669,
+      "min": 106.5956,
+      "max": 142.8797
+    },
+    "process_wall_ms": {
+      "median": 251.35260000024573,
+      "min": 238.16309999892837,
+      "max": 335.41970000078436
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 112.1485,
+      "min": 106.5144,
+      "max": 148.7362
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 349.0147,
+      "min": 324.8245,
+      "max": 515.687
+    },
+    "search_ms": {
+      "median": 154.9773,
+      "min": 133.7185,
+      "max": 222.7633
+    },
+    "phase_total_ms": {
+      "median": 506.6894,
+      "min": 464.4704,
+      "max": 738.4503
+    },
+    "process_wall_ms": {
+      "median": 779.7239999999874,
+      "min": 733.1515999976546,
+      "max": 1116.4195999990625
+    },
+    "executor_bytes": {
+      "median": 24842688,
+      "min": 24842688,
+      "max": 24842688
+    },
+    "host_tile_bytes": {
+      "median": 18551168,
+      "min": 18551168,
+      "max": 18551168
+    },
+    "first_answer_wall_ms": {
+      "median": 510.3384,
+      "min": 443.1365,
+      "max": 727.4021
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 438.0536,
+      "min": 391.2601,
+      "max": 1971.635
+    },
+    "search_ms": {
+      "median": 327.8492,
+      "min": 262.404,
+      "max": 350.1405
+    },
+    "phase_total_ms": {
+      "median": 788.1941,
+      "min": 690.4783,
+      "max": 2234.039
+    },
+    "process_wall_ms": {
+      "median": 1279.5159000015701,
+      "min": 1131.7820999975083,
+      "max": 2688.41760000214
+    },
+    "executor_bytes": {
+      "median": 9719936,
+      "min": 9719936,
+      "max": 9719936
+    },
+    "host_tile_bytes": {
+      "median": 18547456,
+      "min": 18547456,
+      "max": 18547456
+    },
+    "first_answer_wall_ms": {
+      "median": 761.2192,
+      "min": 676.8857,
+      "max": 2248.5673
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-ooc_tile16K_overlapon",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 434.1807,
+      "min": 388.2008,
+      "max": 562.7864
+    },
+    "search_ms": {
+      "median": 714.2506,
+      "min": 651.2157,
+      "max": 848.0999
+    },
+    "phase_total_ms": {
+      "median": 1139.8483,
+      "min": 1049.1379,
+      "max": 1410.8863
+    },
+    "process_wall_ms": {
+      "median": 1985.2015000033134,
+      "min": 1891.7804000011529,
+      "max": 2387.374900001305
+    },
+    "executor_bytes": {
+      "median": 7939968,
+      "min": 7939968,
+      "max": 7939968
+    },
+    "host_tile_bytes": {
+      "median": 18604416,
+      "min": 18604416,
+      "max": 18604416
+    },
+    "first_answer_wall_ms": {
+      "median": 1177.3108,
+      "min": 1098.076,
+      "max": 1372.5127
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-ooc_tile256K_overlapon",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 397.858,
+      "min": 351.283,
+      "max": 1008.1963
+    },
+    "search_ms": {
+      "median": 196.503,
+      "min": 167.8163,
+      "max": 252.2901
+    },
+    "phase_total_ms": {
+      "median": 619.3527,
+      "min": 519.0993,
+      "max": 1260.4864
+    },
+    "process_wall_ms": {
+      "median": 995.1455999980681,
+      "min": 857.6785000004747,
+      "max": 1687.8821999998763
+    },
+    "executor_bytes": {
+      "median": 16846464,
+      "min": 16846464,
+      "max": 16846464
+    },
+    "host_tile_bytes": {
+      "median": 18550400,
+      "min": 18550400,
+      "max": 18550400
+    },
+    "first_answer_wall_ms": {
+      "median": 634.1189,
+      "min": 532.6397,
+      "max": 1263.6552
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-ooc_tile16K_overlapoff",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 400.6869,
+      "min": 372.7876,
+      "max": 519.477
+    },
+    "search_ms": {
+      "median": 787.8412,
+      "min": 751.3471,
+      "max": 865.2984
+    },
+    "phase_total_ms": {
+      "median": 1177.4966,
+      "min": 1152.034,
+      "max": 1384.7754
+    },
+    "process_wall_ms": {
+      "median": 2088.3047000024817,
+      "min": 2045.7800000003772,
+      "max": 2406.034499999805
+    },
+    "executor_bytes": {
+      "median": 7939968,
+      "min": 7939968,
+      "max": 7939968
+    },
+    "host_tile_bytes": {
+      "median": 18604416,
+      "min": 18604416,
+      "max": 18604416
+    },
+    "first_answer_wall_ms": {
+      "median": 1188.0207,
+      "min": 1093.8387,
+      "max": 1385.6097
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-ooc_tile64K_overlapoff",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 418.7118,
+      "min": 378.9902,
+      "max": 857.1726
+    },
+    "search_ms": {
+      "median": 330.7846,
+      "min": 314.7811,
+      "max": 394.5015
+    },
+    "phase_total_ms": {
+      "median": 790.259,
+      "min": 698.9839,
+      "max": 1171.9537
+    },
+    "process_wall_ms": {
+      "median": 1343.1235999996716,
+      "min": 1154.624299997522,
+      "max": 1628.592099998059
+    },
+    "executor_bytes": {
+      "median": 9719936,
+      "min": 9719936,
+      "max": 9719936
+    },
+    "host_tile_bytes": {
+      "median": 18547456,
+      "min": 18547456,
+      "max": 18547456
+    },
+    "first_answer_wall_ms": {
+      "median": 822.1905,
+      "min": 701.7528,
+      "max": 1165.8876
+    }
+  },
+  {
+    "configuration": "uniform1M_rt-ooc_auto",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 531.9658,
+      "min": 484.1554,
+      "max": 1050.1728
+    },
+    "search_ms": {
+      "median": 163.6896,
+      "min": 149.1452,
+      "max": 226.0247
+    },
+    "phase_total_ms": {
+      "median": 688.9704,
+      "min": 647.5031,
+      "max": 1276.1975
+    },
+    "process_wall_ms": {
+      "median": 1010.8682999998564,
+      "min": 970.4304000006232,
+      "max": 1668.4477999988303
+    },
+    "executor_bytes": {
+      "median": 24842688,
+      "min": 24842688,
+      "max": 24842688
+    },
+    "host_tile_bytes": {
+      "median": 18551168,
+      "min": 18551168,
+      "max": 18551168
+    },
+    "first_answer_wall_ms": {
+      "median": 694.6821,
+      "min": 663.7453,
+      "max": 1286.8782
+    }
+  },
+  {
+    "configuration": "uniform4M_cpu-grid",
+    "method": "cpu-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 174.6592,
+      "min": 145.6447,
+      "max": 206.8225
+    },
+    "search_ms": {
+      "median": 8985.0992,
+      "min": 8243.8675,
+      "max": 9648.423
+    },
+    "phase_total_ms": {
+      "median": 9139.9282,
+      "min": 8418.5267,
+      "max": 9830.3571
+    },
+    "process_wall_ms": {
+      "median": 18226.887900000293,
+      "min": 17823.454800000036,
+      "max": 19144.15480000025
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 8899.2331,
+      "min": 8738.709,
+      "max": 9602.1648
+    }
+  },
+  {
+    "configuration": "uniform4M_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 115.9098,
+      "min": 105.9517,
+      "max": 217.1755
+    },
+    "search_ms": {
+      "median": 487.382,
+      "min": 478.7779,
+      "max": 505.0659
+    },
+    "phase_total_ms": {
+      "median": 614.9382,
+      "min": 586.2877,
+      "max": 695.9534
+    },
+    "process_wall_ms": {
+      "median": 1589.038599999185,
+      "min": 1489.9571999994805,
+      "max": 1624.0176999999676
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 612.0351,
+      "min": 585.9138,
+      "max": 697.3849
+    }
+  },
+  {
+    "configuration": "uniform4M_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 1564.7335,
+      "min": 1117.981,
+      "max": 1674.2047
+    },
+    "search_ms": {
+      "median": 911.0602,
+      "min": 734.1285,
+      "max": 1082.9336
+    },
+    "phase_total_ms": {
+      "median": 2474.823,
+      "min": 1852.1095,
+      "max": 2757.1383
+    },
+    "process_wall_ms": {
+      "median": 3987.54689999987,
+      "min": 3082.023599999957,
+      "max": 4387.853399999585
+    },
+    "executor_bytes": {
+      "median": 80319296,
+      "min": 80319296,
+      "max": 80319296
+    },
+    "host_tile_bytes": {
+      "median": 74027776,
+      "min": 74027776,
+      "max": 74027776
+    },
+    "first_answer_wall_ms": {
+      "median": 2419.9157,
+      "min": 1911.7957,
+      "max": 2572.9726
+    }
+  },
+  {
+    "configuration": "uniform4M_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 1150.9474,
+      "min": 1019.5201,
+      "max": 1621.0328
+    },
+    "search_ms": {
+      "median": 2823.0153,
+      "min": 2464.9044,
+      "max": 2984.6118
+    },
+    "phase_total_ms": {
+      "median": 4111.9048,
+      "min": 3484.4245,
+      "max": 4427.7753
+    },
+    "process_wall_ms": {
+      "median": 7447.610299997905,
+      "min": 6312.771000000794,
+      "max": 7926.435400000628
+    },
+    "executor_bytes": {
+      "median": 9717120,
+      "min": 9717120,
+      "max": 9717120
+    },
+    "host_tile_bytes": {
+      "median": 73884288,
+      "min": 73884288,
+      "max": 73884288
+    },
+    "first_answer_wall_ms": {
+      "median": 3817.6903,
+      "min": 3422.3965,
+      "max": 4578.5639
+    }
+  },
+  {
+    "configuration": "scene200K_cpu-grid",
+    "method": "cpu-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 12.4245,
+      "min": 10.1125,
+      "max": 19.0963
+    },
+    "search_ms": {
+      "median": 173.1852,
+      "min": 148.3506,
+      "max": 214.7817
+    },
+    "phase_total_ms": {
+      "median": 187.2962,
+      "min": 158.4631,
+      "max": 226.4735
+    },
+    "process_wall_ms": {
+      "median": 403.37600000202656,
+      "min": 356.36539999904926,
+      "max": 473.0154000026232
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 190.594,
+      "min": 165.9193,
+      "max": 204.651
+    }
+  },
+  {
+    "configuration": "scene200K_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 78.0317,
+      "min": 69.3097,
+      "max": 91.6936
+    },
+    "search_ms": {
+      "median": 4.8154,
+      "min": 3.4244,
+      "max": 5.9082
+    },
+    "phase_total_ms": {
+      "median": 83.165,
+      "min": 74.1251,
+      "max": 97.6018
+    },
+    "process_wall_ms": {
+      "median": 149.9768999965454,
+      "min": 142.6084999984596,
+      "max": 160.49919999932172
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 82.7955,
+      "min": 74.178,
+      "max": 96.4606
+    }
+  },
+  {
+    "configuration": "scene200K_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 261.438,
+      "min": 214.5959,
+      "max": 788.5356
+    },
+    "search_ms": {
+      "median": 25.9994,
+      "min": 19.9311,
+      "max": 32.6082
+    },
+    "phase_total_ms": {
+      "median": 281.3691,
+      "min": 236.8389,
+      "max": 814.9935
+    },
+    "process_wall_ms": {
+      "median": 422.29670000233455,
+      "min": 357.4582000001101,
+      "max": 927.2815999975137
+    },
+    "executor_bytes": {
+      "median": 8541760,
+      "min": 8541760,
+      "max": 8541760
+    },
+    "host_tile_bytes": {
+      "median": 3741696,
+      "min": 3741696,
+      "max": 3741696
+    },
+    "first_answer_wall_ms": {
+      "median": 283.6894,
+      "min": 237.8334,
+      "max": 814.3943
+    }
+  },
+  {
+    "configuration": "scene200K_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 231.0851,
+      "min": 200.4181,
+      "max": 321.8619
+    },
+    "search_ms": {
+      "median": 29.8889,
+      "min": 27.4935,
+      "max": 36.2131
+    },
+    "phase_total_ms": {
+      "median": 260.974,
+      "min": 231.4778,
+      "max": 358.075
+    },
+    "process_wall_ms": {
+      "median": 381.906099999469,
+      "min": 346.8025999973179,
+      "max": 488.3642000022519
+    },
+    "executor_bytes": {
+      "median": 8001408,
+      "min": 8001408,
+      "max": 8001408
+    },
+    "host_tile_bytes": {
+      "median": 3744640,
+      "min": 3744640,
+      "max": 3744640
+    },
+    "first_answer_wall_ms": {
+      "median": 259.6348,
+      "min": 226.8798,
+      "max": 354.6481
+    }
+  },
+  {
+    "configuration": "armadillo_cpu-grid",
+    "method": "cpu-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 10.5466,
+      "min": 10.0379,
+      "max": 14.7198
+    },
+    "search_ms": {
+      "median": 90.5193,
+      "min": 67.8239,
+      "max": 94.3609
+    },
+    "phase_total_ms": {
+      "median": 100.7044,
+      "min": 78.1325,
+      "max": 106.0338
+    },
+    "process_wall_ms": {
+      "median": 246.24609999955283,
+      "min": 227.43329999866546,
+      "max": 255.49229999887757
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 100.1033,
+      "min": 94.7968,
+      "max": 108.5581
+    }
+  },
+  {
+    "configuration": "armadillo_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 94.7444,
+      "min": 77.9156,
+      "max": 726.6804
+    },
+    "search_ms": {
+      "median": 1.593,
+      "min": 1.4333,
+      "max": 1.7736
+    },
+    "phase_total_ms": {
+      "median": 96.518,
+      "min": 79.3489,
+      "max": 728.3581
+    },
+    "process_wall_ms": {
+      "median": 169.0080999978818,
+      "min": 139.64670000132173,
+      "max": 802.8035999996064
+    },
+    "executor_bytes": null,
+    "host_tile_bytes": null,
+    "first_answer_wall_ms": {
+      "median": 96.5512,
+      "min": 79.5038,
+      "max": 728.3758
+    }
+  },
+  {
+    "configuration": "armadillo_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 239.8928,
+      "min": 198.5916,
+      "max": 877.2673
+    },
+    "search_ms": {
+      "median": 15.7181,
+      "min": 13.1068,
+      "max": 17.9353
+    },
+    "phase_total_ms": {
+      "median": 255.2129,
+      "min": 211.6984,
+      "max": 893.4121
+    },
+    "process_wall_ms": {
+      "median": 342.2653000015998,
+      "min": 308.4127999973134,
+      "max": 1004.7754000006535
+    },
+    "executor_bytes": {
+      "median": 7392784,
+      "min": 7392784,
+      "max": 7392784
+    },
+    "host_tile_bytes": {
+      "median": 3241344,
+      "min": 3241344,
+      "max": 3241344
+    },
+    "first_answer_wall_ms": {
+      "median": 257.8551,
+      "min": 214.8765,
+      "max": 891.5507
+    }
+  },
+  {
+    "configuration": "armadillo_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 223.6905,
+      "min": 210.6074,
+      "max": 252.3918
+    },
+    "search_ms": {
+      "median": 18.0561,
+      "min": 17.5094,
+      "max": 23.8412
+    },
+    "phase_total_ms": {
+      "median": 241.1999,
+      "min": 228.1287,
+      "max": 270.4479
+    },
+    "process_wall_ms": {
+      "median": 358.98380000071484,
+      "min": 322.48299999992014,
+      "max": 371.39380000007804
+    },
+    "executor_bytes": {
+      "median": 7245960,
+      "min": 7245960,
+      "max": 7245960
+    },
+    "host_tile_bytes": {
+      "median": 3240320,
+      "min": 3240320,
+      "max": 3240320
+    },
+    "first_answer_wall_ms": {
+      "median": 261.3965,
+      "min": 227.685,
+      "max": 269.9415
+    }
+  }
+]

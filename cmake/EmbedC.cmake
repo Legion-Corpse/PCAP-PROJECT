@@ -1,0 +1,6 @@
+file(READ "${INPUT}" content HEX)
+string(LENGTH "${content}" hex_len)
+math(EXPR size "${hex_len}/2")
+string(REGEX REPLACE "([0-9a-f][0-9a-f])" "0x\\1," bytes "${content}")
+string(REGEX REPLACE "((0x[0-9a-f][0-9a-f],){32})" "\\1\n" bytes "${bytes}")
+file(WRITE "${OUTPUT}" "#include <stddef.h>\nconst unsigned char g_devicePrograms[]={${bytes}0};\nconst size_t g_deviceProgramsSize=${size};\n")

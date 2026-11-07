@@ -1,0 +1,794 @@
+[
+  {
+    "configuration": "uniform1M_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 95.4433,
+      "min": 84.7102,
+      "max": 123.6739
+    },
+    "first_answer_wall_ms": {
+      "median": 127.1513,
+      "min": 108.0928,
+      "max": 149.9395
+    },
+    "prefixes": [
+      {
+        "batches": 1,
+        "cold_phase_ms": {
+          "median": 127.14659999999999,
+          "min": 108.0891,
+          "max": 149.9367
+        },
+        "warm_phase_ms": {
+          "median": 129.6026,
+          "min": 105.5016,
+          "max": 152.16740000000001
+        },
+        "cold_search_ms": {
+          "median": 26.2628,
+          "min": 23.3789,
+          "max": 34.1627
+        },
+        "warm_search_ms": {
+          "median": 28.4935,
+          "min": 20.7914,
+          "max": 34.1593
+        }
+      },
+      {
+        "batches": 2,
+        "cold_phase_ms": {
+          "median": 161.3059,
+          "min": 128.88049999999998,
+          "max": 178.4302
+        },
+        "warm_phase_ms": {
+          "median": 163.4651,
+          "min": 130.2697,
+          "max": 181.5621
+        },
+        "cold_search_ms": {
+          "median": 54.756299999999996,
+          "min": 44.1703,
+          "max": 66.55760000000001
+        },
+        "warm_search_ms": {
+          "median": 57.8882,
+          "min": 45.5595,
+          "max": 68.0218
+        }
+      },
+      {
+        "batches": 4,
+        "cold_phase_ms": {
+          "median": 222.4916,
+          "min": 177.30540000000002,
+          "max": 236.8777
+        },
+        "warm_phase_ms": {
+          "median": 215.6721,
+          "min": 174.86540000000002,
+          "max": 238.9537
+        },
+        "cold_search_ms": {
+          "median": 113.2038,
+          "min": 92.5952,
+          "max": 127.0483
+        },
+        "warm_search_ms": {
+          "median": 115.2798,
+          "min": 90.15520000000001,
+          "max": 121.2107
+        }
+      },
+      {
+        "batches": 8,
+        "cold_phase_ms": {
+          "median": 323.0811,
+          "min": 265.32030000000003,
+          "max": 352.1281
+        },
+        "warm_phase_ms": {
+          "median": 318.8047,
+          "min": 265.6258,
+          "max": 354.63480000000004
+        },
+        "cold_search_ms": {
+          "median": 227.6378,
+          "min": 180.61010000000002,
+          "max": 235.9272
+        },
+        "warm_search_ms": {
+          "median": 223.3614,
+          "min": 180.9156,
+          "max": 230.9609
+        }
+      },
+      {
+        "batches": 16,
+        "cold_phase_ms": {
+          "median": 537.9148,
+          "min": 456.9185,
+          "max": 579.9851
+        },
+        "warm_phase_ms": {
+          "median": 526.8943,
+          "min": 456.9219,
+          "max": 580.1104
+        },
+        "cold_search_ms": {
+          "median": 435.986,
+          "min": 372.2083,
+          "max": 456.3112
+        },
+        "warm_search_ms": {
+          "median": 430.5657,
+          "min": 372.2117,
+          "max": 456.4365
+        }
+      }
+    ]
+  },
+  {
+    "configuration": "uniform1M_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 387.5083,
+      "min": 349.3148,
+      "max": 450.4501
+    },
+    "first_answer_wall_ms": {
+      "median": 532.8972,
+      "min": 468.0515,
+      "max": 607.5106
+    },
+    "prefixes": [
+      {
+        "batches": 1,
+        "cold_phase_ms": {
+          "median": 532.8951,
+          "min": 468.05,
+          "max": 607.5085
+        },
+        "warm_phase_ms": {
+          "median": 558.6953000000001,
+          "min": 474.8907,
+          "max": 584.947
+        },
+        "cold_search_ms": {
+          "median": 145.3868,
+          "min": 118.7352,
+          "max": 157.0584
+        },
+        "warm_search_ms": {
+          "median": 134.4969,
+          "min": 121.7706,
+          "max": 171.187
+        }
+      },
+      {
+        "batches": 2,
+        "cold_phase_ms": {
+          "median": 704.0821000000001,
+          "min": 594.0738,
+          "max": 742.0054
+        },
+        "warm_phase_ms": {
+          "median": 715.2309,
+          "min": 588.2555,
+          "max": 787.1753
+        },
+        "cold_search_ms": {
+          "median": 291.5553,
+          "min": 240.9537,
+          "max": 318.4261
+        },
+        "warm_search_ms": {
+          "median": 312.17600000000004,
+          "min": 235.1354,
+          "max": 376.2298
+        }
+      },
+      {
+        "batches": 4,
+        "cold_phase_ms": {
+          "median": 1029.7447,
+          "min": 827.3842999999999,
+          "max": 1148.1608
+        },
+        "warm_phase_ms": {
+          "median": 1041.5753,
+          "min": 820.3571999999999,
+          "max": 1196.9099
+        },
+        "cold_search_ms": {
+          "median": 616.607,
+          "min": 474.2642,
+          "max": 737.2153000000001
+        },
+        "warm_search_ms": {
+          "median": 606.219,
+          "min": 467.2371,
+          "max": 785.9644000000001
+        }
+      },
+      {
+        "batches": 8,
+        "cold_phase_ms": {
+          "median": 1696.1284,
+          "min": 1307.483,
+          "max": 1967.3991
+        },
+        "warm_phase_ms": {
+          "median": 1699.7089,
+          "min": 1311.2041,
+          "max": 2014.1152
+        },
+        "cold_search_ms": {
+          "median": 1308.6201,
+          "min": 954.3629,
+          "max": 1556.4536
+        },
+        "warm_search_ms": {
+          "median": 1312.2006000000001,
+          "min": 958.0840000000001,
+          "max": 1603.1697
+        }
+      },
+      {
+        "batches": 16,
+        "cold_phase_ms": {
+          "median": 3069.1636,
+          "min": 2225.645,
+          "max": 3580.6812999999997
+        },
+        "warm_phase_ms": {
+          "median": 3065.0008,
+          "min": 2233.2001,
+          "max": 3653.363
+        },
+        "cold_search_ms": {
+          "median": 2618.7135,
+          "min": 1872.5249000000001,
+          "max": 3169.7358
+        },
+        "warm_search_ms": {
+          "median": 2614.5507,
+          "min": 1880.08,
+          "max": 3242.4175
+        }
+      }
+    ]
+  },
+  {
+    "configuration": "uniform1M_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 389.2316,
+      "min": 333.8119,
+      "max": 422.3779
+    },
+    "first_answer_wall_ms": {
+      "median": 719.5248,
+      "min": 575.7701,
+      "max": 759.5267
+    },
+    "prefixes": [
+      {
+        "batches": 1,
+        "cold_phase_ms": {
+          "median": 719.5228999999999,
+          "min": 575.7687,
+          "max": 759.5249
+        },
+        "warm_phase_ms": {
+          "median": 703.1505999999999,
+          "min": 573.7969,
+          "max": 776.143
+        },
+        "cold_search_ms": {
+          "median": 316.4774,
+          "min": 241.9568,
+          "max": 337.147
+        },
+        "warm_search_ms": {
+          "median": 292.4606,
+          "min": 239.985,
+          "max": 353.7651
+        }
+      },
+      {
+        "batches": 2,
+        "cold_phase_ms": {
+          "median": 1019.6279999999999,
+          "min": 815.7537,
+          "max": 1113.29
+        },
+        "warm_phase_ms": {
+          "median": 1004.2276999999999,
+          "min": 828.299,
+          "max": 1100.6078
+        },
+        "cold_search_ms": {
+          "median": 608.938,
+          "min": 481.9418,
+          "max": 690.9121
+        },
+        "warm_search_ms": {
+          "median": 593.5377,
+          "min": 494.48710000000005,
+          "max": 678.2299
+        }
+      },
+      {
+        "batches": 4,
+        "cold_phase_ms": {
+          "median": 1599.8901,
+          "min": 1336.569,
+          "max": 1790.5947
+        },
+        "warm_phase_ms": {
+          "median": 1565.3383,
+          "min": 1338.4958,
+          "max": 1815.5493000000001
+        },
+        "cold_search_ms": {
+          "median": 1189.2001,
+          "min": 1002.7571,
+          "max": 1368.2168000000001
+        },
+        "warm_search_ms": {
+          "median": 1154.6482999999998,
+          "min": 1002.2116,
+          "max": 1393.1714000000002
+        }
+      },
+      {
+        "batches": 8,
+        "cold_phase_ms": {
+          "median": 2756.4783,
+          "min": 2358.879,
+          "max": 3233.2031
+        },
+        "warm_phase_ms": {
+          "median": 2815.5,
+          "min": 2362.6926,
+          "max": 3241.9485
+        },
+        "cold_search_ms": {
+          "median": 2367.2467,
+          "min": 2025.0671,
+          "max": 2810.8252
+        },
+        "warm_search_ms": {
+          "median": 2404.81,
+          "min": 2026.4084,
+          "max": 2819.5706
+        }
+      },
+      {
+        "batches": 16,
+        "cold_phase_ms": {
+          "median": 5413.2693,
+          "min": 4436.4293,
+          "max": 5993.553000000001
+        },
+        "warm_phase_ms": {
+          "median": 5465.649899999999,
+          "min": 4441.2626,
+          "max": 5998.9871
+        },
+        "cold_search_ms": {
+          "median": 5002.5793,
+          "min": 4102.6174,
+          "max": 5571.1751
+        },
+        "warm_search_ms": {
+          "median": 5054.9599,
+          "min": 4104.9784,
+          "max": 5576.6092
+        }
+      }
+    ]
+  },
+  {
+    "configuration": "uniform4M_cuda-grid",
+    "method": "cuda-grid",
+    "n": 5,
+    "index_ms": {
+      "median": 110.2327,
+      "min": 100.1415,
+      "max": 141.6261
+    },
+    "first_answer_wall_ms": {
+      "median": 613.9829,
+      "min": 600.7187,
+      "max": 721.0124
+    },
+    "prefixes": [
+      {
+        "batches": 1,
+        "cold_phase_ms": {
+          "median": 613.979,
+          "min": 600.7143,
+          "max": 721.0070000000001
+        },
+        "warm_phase_ms": {
+          "median": 613.2403,
+          "min": 606.2875,
+          "max": 723.2961
+        },
+        "cold_search_ms": {
+          "median": 506.4205,
+          "min": 490.4816,
+          "max": 579.3809
+        },
+        "warm_search_ms": {
+          "median": 507.5642,
+          "min": 496.0548,
+          "max": 581.67
+        }
+      },
+      {
+        "batches": 2,
+        "cold_phase_ms": {
+          "median": 1119.3725,
+          "min": 1096.7691,
+          "max": 1302.677
+        },
+        "warm_phase_ms": {
+          "median": 1119.8657,
+          "min": 1103.0602,
+          "max": 1293.6163
+        },
+        "cold_search_ms": {
+          "median": 1013.9847,
+          "min": 986.5364,
+          "max": 1161.0509
+        },
+        "warm_search_ms": {
+          "median": 1014.0697,
+          "min": 992.8275,
+          "max": 1151.9902
+        }
+      },
+      {
+        "batches": 4,
+        "cold_phase_ms": {
+          "median": 2131.2802,
+          "min": 2093.0027,
+          "max": 2450.8534999999997
+        },
+        "warm_phase_ms": {
+          "median": 2133.1663,
+          "min": 2095.6018,
+          "max": 2453.3376
+        },
+        "cold_search_ms": {
+          "median": 2027.4474,
+          "min": 1982.77,
+          "max": 2309.2273999999998
+        },
+        "warm_search_ms": {
+          "median": 2028.0703,
+          "min": 1985.3691,
+          "max": 2311.7115
+        }
+      },
+      {
+        "batches": 8,
+        "cold_phase_ms": {
+          "median": 4156.707,
+          "min": 4061.418,
+          "max": 4797.6421
+        },
+        "warm_phase_ms": {
+          "median": 4155.3896,
+          "min": 4064.5241,
+          "max": 4805.5411
+        },
+        "cold_search_ms": {
+          "median": 4053.3815,
+          "min": 3951.1853,
+          "max": 4656.016
+        },
+        "warm_search_ms": {
+          "median": 4047.5428,
+          "min": 3954.2914,
+          "max": 4663.915
+        }
+      },
+      {
+        "batches": 16,
+        "cold_phase_ms": {
+          "median": 8209.0699,
+          "min": 8018.693799999999,
+          "max": 9447.1145
+        },
+        "warm_phase_ms": {
+          "median": 8207.7921,
+          "min": 8019.425499999999,
+          "max": 9454.495700000001
+        },
+        "cold_search_ms": {
+          "median": 8101.2231,
+          "min": 7908.4610999999995,
+          "max": 9316.232899999999
+        },
+        "warm_search_ms": {
+          "median": 8099.9453,
+          "min": 7909.1928,
+          "max": 9323.6141
+        }
+      }
+    ]
+  },
+  {
+    "configuration": "uniform4M_rt-incore",
+    "method": "rt-incore",
+    "n": 5,
+    "index_ms": {
+      "median": 1059.8431,
+      "min": 983.4958,
+      "max": 1203.3131
+    },
+    "first_answer_wall_ms": {
+      "median": 1864.8089,
+      "min": 1770.8563,
+      "max": 2460.5721
+    },
+    "prefixes": [
+      {
+        "batches": 1,
+        "cold_phase_ms": {
+          "median": 1864.8071,
+          "min": 1770.8545,
+          "max": 2460.5698
+        },
+        "warm_phase_ms": {
+          "median": 1898.6154999999999,
+          "min": 1769.2902,
+          "max": 3111.1198999999997
+        },
+        "cold_search_ms": {
+          "median": 804.964,
+          "min": 782.6479,
+          "max": 1382.1953
+        },
+        "warm_search_ms": {
+          "median": 838.7724,
+          "min": 783.9413,
+          "max": 2032.7454
+        }
+      },
+      {
+        "batches": 2,
+        "cold_phase_ms": {
+          "median": 2703.5795,
+          "min": 2556.6489,
+          "max": 4493.3152
+        },
+        "warm_phase_ms": {
+          "median": 2643.5176,
+          "min": 2522.2153000000003,
+          "max": 4230.2354
+        },
+        "cold_search_ms": {
+          "median": 1643.7364,
+          "min": 1566.5892,
+          "max": 3414.9407
+        },
+        "warm_search_ms": {
+          "median": 1583.6745,
+          "min": 1538.7195000000002,
+          "max": 3151.8609
+        }
+      },
+      {
+        "batches": 4,
+        "cold_phase_ms": {
+          "median": 4217.4967,
+          "min": 4071.5398,
+          "max": 6874.0968
+        },
+        "warm_phase_ms": {
+          "median": 4227.584199999999,
+          "min": 4043.7961,
+          "max": 6527.2714
+        },
+        "cold_search_ms": {
+          "median": 3157.6536,
+          "min": 3088.044,
+          "max": 5795.7223
+        },
+        "warm_search_ms": {
+          "median": 3181.9718,
+          "min": 3060.3003,
+          "max": 5448.8969
+        }
+      },
+      {
+        "batches": 8,
+        "cold_phase_ms": {
+          "median": 7357.8895,
+          "min": 7181.9749,
+          "max": 10836.0683
+        },
+        "warm_phase_ms": {
+          "median": 7334.4286,
+          "min": 7127.7116,
+          "max": 10480.3748
+        },
+        "cold_search_ms": {
+          "median": 6312.2771,
+          "min": 6198.4791000000005,
+          "max": 9757.693800000001
+        },
+        "warm_search_ms": {
+          "median": 6288.8162,
+          "min": 6144.2158,
+          "max": 9402.0003
+        }
+      },
+      {
+        "batches": 16,
+        "cold_phase_ms": {
+          "median": 13855.2029,
+          "min": 13281.925700000002,
+          "max": 18270.4064
+        },
+        "warm_phase_ms": {
+          "median": 13942.4938,
+          "min": 13262.8958,
+          "max": 17853.7094
+        },
+        "cold_search_ms": {
+          "median": 12809.5905,
+          "min": 12298.429900000001,
+          "max": 17192.0319
+        },
+        "warm_search_ms": {
+          "median": 12896.8814,
+          "min": 12279.4,
+          "max": 16775.3349
+        }
+      }
+    ]
+  },
+  {
+    "configuration": "uniform4M_rt-ooc",
+    "method": "rt-ooc",
+    "n": 5,
+    "index_ms": {
+      "median": 1186.7091,
+      "min": 1069.6512,
+      "max": 1326.8245
+    },
+    "first_answer_wall_ms": {
+      "median": 3697.8056,
+      "min": 3463.0406,
+      "max": 4187.9651
+    },
+    "prefixes": [
+      {
+        "batches": 1,
+        "cold_phase_ms": {
+          "median": 3697.8037,
+          "min": 3463.0389000000005,
+          "max": 4187.9632
+        },
+        "warm_phase_ms": {
+          "median": 3954.2817,
+          "min": 3458.0824000000002,
+          "max": 4090.5334999999995
+        },
+        "cold_search_ms": {
+          "median": 2517.3733,
+          "min": 2383.4671,
+          "max": 2861.1387
+        },
+        "warm_search_ms": {
+          "median": 2740.2537,
+          "min": 2388.4312,
+          "max": 2767.5726
+        }
+      },
+      {
+        "batches": 2,
+        "cold_phase_ms": {
+          "median": 6438.0574,
+          "min": 5851.4701000000005,
+          "max": 6951.6722
+        },
+        "warm_phase_ms": {
+          "median": 6574.815200000001,
+          "min": 5950.906000000001,
+          "max": 6932.927299999999
+        },
+        "cold_search_ms": {
+          "median": 5123.7208,
+          "min": 4781.8189,
+          "max": 5624.8477
+        },
+        "warm_search_ms": {
+          "median": 5260.4786,
+          "min": 4881.254800000001,
+          "max": 5620.455
+        }
+      },
+      {
+        "batches": 4,
+        "cold_phase_ms": {
+          "median": 11785.105200000002,
+          "min": 11004.906200000001,
+          "max": 12618.1774
+        },
+        "warm_phase_ms": {
+          "median": 12216.0762,
+          "min": 11342.9051,
+          "max": 12580.993
+        },
+        "cold_search_ms": {
+          "median": 10640.2936,
+          "min": 9935.255000000001,
+          "max": 11291.3529
+        },
+        "warm_search_ms": {
+          "median": 11071.2646,
+          "min": 10273.2539,
+          "max": 11392.0292
+        }
+      },
+      {
+        "batches": 8,
+        "cold_phase_ms": {
+          "median": 23698.031600000002,
+          "min": 21766.8098,
+          "max": 24166.057299999997
+        },
+        "warm_phase_ms": {
+          "median": 24183.963200000002,
+          "min": 22090.4951,
+          "max": 25132.668999999998
+        },
+        "cold_search_ms": {
+          "median": 22553.22,
+          "min": 20697.1586,
+          "max": 22876.5482
+        },
+        "warm_search_ms": {
+          "median": 23039.1516,
+          "min": 21020.8439,
+          "max": 23805.8445
+        }
+      },
+      {
+        "batches": 16,
+        "cold_phase_ms": {
+          "median": 47777.4804,
+          "min": 44020.2398,
+          "max": 50445.2526
+        },
+        "warm_phase_ms": {
+          "median": 48454.272600000004,
+          "min": 44129.0832,
+          "max": 50700.7661
+        },
+        "cold_search_ms": {
+          "median": 46463.1438,
+          "min": 42950.5886,
+          "max": 49118.4281
+        },
+        "warm_search_ms": {
+          "median": 47139.936,
+          "min": 43059.432,
+          "max": 49373.9416
+        }
+      }
+    ]
+  }
+]
